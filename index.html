@@ -255,6 +255,8 @@ textarea{resize:vertical;min-height:82px;line-height:1.4}
 .transfer-box.show{display:block;animation:fade .3s}
 .transfer-box .alias-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}
 .transfer-box .alias{font-size:1.35rem;font-weight:700;color:var(--celeste)}
+.transfer-box .alias-name{color:var(--crema);font-size:.95rem;margin:-2px 0 6px}
+.transfer-box .alias-name::before{content:"👤 ";}
 .copy-btn{background:var(--celeste);color:var(--navy-2);border:0;border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:.85rem}
 .transfer-box .warn{font-size:.85rem;color:#ffd9a1;display:flex;gap:8px;margin-top:8px}
 
@@ -396,6 +398,7 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
         <div class="transfer-box" id="transferBox">
           <div>Transferí a nuestro alias:</div>
           <div class="alias-row"><span class="alias" id="aliasTxt">Pipo.monu</span><button class="copy-btn" type="button" onclick="copyAlias()">Copiar</button></div>
+          <div class="alias-name">Nombre: Ignacio Russo</div>
           <div class="warn">⚠️ <span>Importante: enviá el <strong>comprobante de transferencia</strong> por WhatsApp para confirmar tu pedido.</span></div>
         </div>
         <label for="fNotes">Aclaraciones / comentarios</label>
@@ -761,9 +764,6 @@ function closeNav(){document.getElementById('navLinks').classList.remove('open')
 let toastT;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2400);}
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('solid',scrollY>40);
-  // parallax suave del medallón (ligado al scroll, no es una animación en loop)
-  const hp=document.getElementById('heroPhoto');
-  if(hp&&scrollY<window.innerHeight) hp.style.transform=`translateY(${scrollY*0.12}px)`;
 },{passive:true});
 
 document.addEventListener('DOMContentLoaded',()=>{

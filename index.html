@@ -123,6 +123,28 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 .cat-tab:hover{border-color:var(--mostaza)}
 .cat-tab.active{background:var(--mostaza);color:var(--espresso);border-color:var(--mostaza)}
 .cat-tab.mundial.active{background:linear-gradient(90deg,var(--celeste),var(--navy));color:#fff;border-color:transparent}
+/* indicador de que las categorías se deslizan (mobile) */
+.cat-tabs-wrap{position:relative}
+.tabs-fade{position:absolute;top:0;right:0;bottom:14px;width:52px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--bg-2));opacity:0;transition:opacity .3s;
+  display:flex;align-items:center;justify-content:flex-end;padding-right:4px}
+.tabs-fade::after{content:"›";color:var(--mostaza-2);font-size:1.5rem;font-weight:700;line-height:1}
+.swipe-hint{display:none}
+@media(max-width:640px){
+  .cat-tabs{margin-bottom:8px}
+  .swipe-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 22px;
+    color:var(--mostaza-2);font-size:.85rem;font-weight:600;transition:opacity .4s}
+  .swipe-hint.hide{opacity:0;pointer-events:none}
+  .swipe-hint .arrow{animation:swipeArrow 1.2s ease-in-out infinite}
+}
+@keyframes swipeArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+/* botón LISTO -> pasa a completar el pedido */
+.menu-cta{display:flex;justify-content:center;margin-top:42px}
+.ready-btn{background:#25d366;color:#062b12;border:0;border-radius:14px;padding:16px 40px;font-family:inherit;
+  font-weight:700;font-size:1.12rem;cursor:pointer;box-shadow:0 12px 30px rgba(37,211,102,.3);
+  transition:transform .15s,filter .2s;display:inline-flex;align-items:center;gap:9px}
+.ready-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.ready-btn:active{transform:translateY(0)}
 
 .cat-block{display:none}
 .cat-block.show{display:block;animation:fade .35s ease}
@@ -140,9 +162,9 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 .item:hover{transform:translateY(-4px);border-color:rgba(232,148,46,.5)}
 .item.mundial{border-color:rgba(124,179,224,.35)}
 .item.sinstock{opacity:.6}
-.item-photo{position:relative;aspect-ratio:4/3;overflow:hidden;background:#1a110a}
-.item-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.item:hover .item-photo img{transform:scale(1.05)}
+.item-photo{position:relative;aspect-ratio:1/1;overflow:hidden;background:radial-gradient(circle at 50% 38%,#2c1c11,#140d07)}
+.item-photo img{width:100%;height:100%;object-fit:contain;transition:transform .4s}
+.item:hover .item-photo img{transform:scale(1.03)}
 .item-photo .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
   background:radial-gradient(circle at 50% 35%,#3a2415,#1a110a);color:var(--kraft)}
 .item-photo .ph span{font-size:2.6rem}
@@ -179,7 +201,7 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 /* ============================================================
    REELS — corren constantemente, click abre Instagram
    ============================================================ */
-.reels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:900px;margin:0 auto}
+.reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
 @media(max-width:520px){.reels-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
 .reel{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;border:1px solid rgba(246,239,226,.12);
   cursor:pointer;display:block;box-shadow:var(--sombra);transition:transform .25s;background:#120b06}
@@ -218,10 +240,11 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 .hours .clock{font-size:2.3rem;color:var(--mostaza-2);font-weight:700;display:block;margin-top:4px}
 
 label{display:block;font-size:.9rem;margin:15px 0 7px;color:var(--kraft);font-weight:500}
-input,select{width:100%;padding:13px 15px;border-radius:12px;border:1px solid rgba(246,239,226,.2);
+input,select,textarea{width:100%;padding:13px 15px;border-radius:12px;border:1px solid rgba(246,239,226,.2);
   background:rgba(0,0,0,.22);color:var(--texto);font-family:inherit;font-size:16px;transition:border-color .2s}
-input:focus,select:focus{outline:none;border-color:var(--mostaza)}
-input::placeholder{color:#8c7a63}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--mostaza)}
+input::placeholder,textarea::placeholder{color:#8c7a63}
+textarea{resize:vertical;min-height:82px;line-height:1.4}
 .pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
 .pay{border:1px solid rgba(246,239,226,.2);border-radius:12px;padding:14px;text-align:center;cursor:pointer;
   transition:all .2s;font-weight:600}
@@ -319,8 +342,13 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
       <h2 class="sec-title">Elegí tu favorita</h2>
       <p class="sec-note">Simple, doble o triple · las hamburguesas incluyen papas fritas</p>
     </div>
-    <div class="cat-tabs" id="catTabs"></div>
+    <div class="cat-tabs-wrap" id="catTabsWrap">
+      <div class="cat-tabs" id="catTabs"></div>
+      <span class="tabs-fade" aria-hidden="true"></span>
+    </div>
+    <div class="swipe-hint" id="swipeHint"><span class="arrow">👉</span> Deslizá para ver más categorías</div>
     <div id="catBlocks"></div>
+    <div class="menu-cta"><button class="ready-btn" onclick="goToOrderFocus()">✅ Listo — hacer mi pedido</button></div>
   </div>
 </section>
 
@@ -370,6 +398,8 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
           <div class="alias-row"><span class="alias" id="aliasTxt">Pipo.monu</span><button class="copy-btn" type="button" onclick="copyAlias()">Copiar</button></div>
           <div class="warn">⚠️ <span>Importante: enviá el <strong>comprobante de transferencia</strong> por WhatsApp para confirmar tu pedido.</span></div>
         </div>
+        <label for="fNotes">Aclaraciones / comentarios</label>
+        <textarea id="fNotes" rows="3" placeholder="Ej: la Cheese sin cebolla, sin sal en las papas, cortar al medio…"></textarea>
         <p class="err" id="errBox"></p>
         <button class="send-btn" id="sendBtn" onclick="sendOrder()">
           <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.907z"/></svg>
@@ -483,6 +513,8 @@ const REELS = [
   {video:"reels/2.mp4", poster:"img/kansas.jpg",     cap:"Burger Kansas ⭐",         url:"https://www.instagram.com/_monuburger/p/DZamGa1lQai/"},
   {video:"reels/3.mp4", poster:"img/witcher.jpg",    cap:"Witcher a full 🔥",        url:"https://www.instagram.com/_monuburger/p/DZalH7tFUzA/"},
   {video:"reels/4.mp4", poster:"img/monuburger.jpg", cap:"La Monuburger 🍳",         url:"https://www.instagram.com/_monuburger/"},
+  {video:"reels/5.mp4", poster:"img/bacon.jpg",      cap:"Bacon burger 🥓",          url:"https://www.instagram.com/_monuburger/reels/"},
+  {video:"reels/6.mp4", poster:"img/crispy.jpg",     cap:"Crispy crocante 🧅",       url:"https://www.instagram.com/_monuburger/reels/"},
 ];
 
 /* =====================================================================
@@ -612,6 +644,40 @@ function removeKey(key){
   renderAction(id);renderSummary();
 }
 function goToOrder(){document.getElementById('pedido').scrollIntoView({behavior:'smooth'});}
+function goToOrderFocus(){
+  document.getElementById('pedido').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{const n=document.getElementById('fName');n&&n.focus({preventScroll:true});},650);
+}
+/* indicador de deslizamiento de categorías (mobile) */
+function initTabHint(){
+  const tabs=document.getElementById('catTabs');
+  const fade=document.querySelector('.tabs-fade');
+  const hint=document.getElementById('swipeHint');
+  const upd=()=>{
+    const more = tabs.scrollWidth > tabs.clientWidth+8 && (tabs.scrollLeft + tabs.clientWidth < tabs.scrollWidth - 4);
+    if(fade) fade.style.opacity = more ? '1' : '0';   // inline: siempre se pinta
+  };
+  upd();
+  tabs.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  // el hint se oculta con la interacción REAL del usuario (no con el empujón automático)
+  const hideHint=()=>hint&&hint.classList.add('hide');
+  tabs.addEventListener('pointerdown',hideHint,{passive:true});
+  tabs.addEventListener('touchstart',hideHint,{passive:true});
+  const scrollable = tabs.scrollWidth > tabs.clientWidth+8;
+  if(scrollable && window.innerWidth<=640){
+    // "empujón" para mostrar que se puede deslizar, cuando el menú entra en pantalla
+    let nudged=false;
+    const nudge=()=>{ if(nudged) return; nudged=true;
+      tabs.scrollTo({left:52,behavior:'smooth'});
+      setTimeout(()=>tabs.scrollTo({left:0,behavior:'smooth'}),600); };
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver((en)=>{ if(en[0].isIntersecting){nudge();io.disconnect();} },{threshold:.4});
+      io.observe(document.getElementById('menu'));
+    } else { setTimeout(nudge,800); }
+    // el hint queda hasta que el usuario deslice de verdad
+  } else { hideHint(); }
+}
 
 /* ---------- REELS ---------- */
 function buildReels(){
@@ -672,6 +738,7 @@ function showErr(msg){const e=document.getElementById('errBox');e.textContent=ms
 function sendOrder(){
   const name=document.getElementById('fName').value.trim();
   const phone=document.getElementById('fPhone').value.trim();
+  const notes=document.getElementById('fNotes').value.trim();
   const items=Object.values(order);
   if(!name) return showErr('Por favor ingresá tu nombre y apellido.');
   if(!phone||phone.replace(/\D/g,'').length<6) return showErr('Ingresá un número de celular válido.');
@@ -683,6 +750,7 @@ function sendOrder(){
   msg+=`*Nombre:* ${name}\n*Celular:* ${phone}\n*Pago:* ${payMethod}\n`;
   if(payMethod==='Transferencia') msg+=`   Alias: ${CONFIG.alias}\n   (Envío el comprobante por WhatsApp) 🧾\n`;
   msg+=`\n*Pedido:*\n${lines.join('\n')}\n\n*TOTAL: ${fmt(total)}*`;
+  if(notes) msg+=`\n\n*Aclaraciones:* ${notes}`;
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
   toast('Abriendo WhatsApp… ¡Gracias! 🍔');
 }
@@ -699,7 +767,7 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 document.addEventListener('DOMContentLoaded',()=>{
-  buildMenu();buildReels();renderSummary();refreshStatus();
+  buildMenu();buildReels();renderSummary();refreshStatus();initTabHint();
   setInterval(refreshStatus,60000);
   document.getElementById('year').textContent=new Date().getFullYear();
 });

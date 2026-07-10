@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MONU BURGER — Más que una burger</title>
+<meta name="description" content="MONU BURGER — Hamburguesas artesanales en Argentina. Pedí por WhatsApp. Todos los días de 19:30 a 00:00.">
+<meta name="theme-color" content="#1b120b">
+<meta property="og:title" content="MONU BURGER — Más que una burger">
+<meta property="og:description" content="Hamburguesas artesanales. Pedí por WhatsApp. Todos los días 19:30 a 00:00.">
+<meta property="og:image" content="img/monuburger.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MONU BURGER — paleta extraída del Instagram @_monuburger
+   ============================================================ */
+:root{
+  --kraft:#d9c2a3; --kraft-soft:#e7d7bd;
+  --espresso:#2a1b10; --espresso-2:#3b2718;
+  --mostaza:#e8942e; --mostaza-2:#f2a93b;
+  --navy:#26407b; --navy-2:#1c2f5c; --celeste:#7cb3e0;
+  --crema:#f6efe2; --verde:#7fae54; --tomate:#c8452f;
+  --bg:#1b120b; --bg-2:#241811; --card:#2e1f14;
+  --texto:#f6efe2;
+  --sombra:0 18px 45px rgba(0,0,0,.45);
+  --radio:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Fredoka',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--texto);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.35}
+h1,h2,h3{font-weight:700;line-height:.98}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font-family:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.script{font-family:'Pacifico',cursive;font-weight:400}
+.pad{padding:clamp(64px,10vw,100px) 0}
+
+/* ---------- NAV ---------- */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;background:linear-gradient(rgba(27,18,11,.92),rgba(27,18,11,0));transition:background .3s,box-shadow .3s}
+nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.02rem;letter-spacing:.5px}
+.nav-logo svg{width:32px;height:32px;flex:none}
+.nav-links{display:flex;gap:24px;font-size:.98rem;align-items:center}
+.nav-links a{opacity:.85;transition:opacity .2s,color .2s}
+.nav-links a:hover{opacity:1;color:var(--mostaza-2)}
+.nav-cta{background:var(--mostaza)!important;color:var(--espresso)!important;padding:9px 18px;border-radius:999px;font-weight:600;opacity:1!important;transition:transform .15s,background .2s}
+.nav-cta:hover{transform:translateY(-2px)}
+.nav-burger{display:none;background:none;border:0;color:var(--texto);font-size:1.7rem;cursor:pointer;line-height:1;z-index:60}
+@media(max-width:780px){
+  .nav-links{position:fixed;inset:0 0 0 auto;width:min(80%,300px);height:100vh;background:var(--bg-2);
+    flex-direction:column;justify-content:center;gap:28px;padding:40px;transform:translateX(100%);
+    transition:transform .35s;font-size:1.3rem;box-shadow:var(--sombra)}
+  .nav-links.open{transform:translateX(0)}
+  .nav-burger{display:block}
+}
+
+/* ============================================================
+   HERO — logo + nombre + HAMBURGUESA REAL (sin animación)
+   ============================================================ */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:96px 20px 172px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('img/njersey.jpg') center/cover no-repeat;
+  transform:scale(1.15);filter:blur(14px) brightness(.42) saturate(1.1)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 90% at 50% 20%,rgba(58,36,21,.25),var(--bg) 78%),
+  linear-gradient(180deg,rgba(27,18,11,.55),rgba(27,18,11,.35) 40%,var(--bg))}
+.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(246,239,226,.28);border-radius:999px;
+  padding:7px 16px;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--kraft);
+  margin-bottom:22px;backdrop-filter:blur(4px);background:rgba(27,18,11,.35)}
+.hero-badge .dot{width:9px;height:9px;border-radius:50%;background:var(--verde);box-shadow:0 0 10px var(--verde)}
+.hero-title{font-size:clamp(3.2rem,14vw,9rem);letter-spacing:-2px;line-height:.82;text-shadow:0 10px 34px rgba(0,0,0,.6)}
+.hero-title .monu{color:var(--crema);display:block}
+.hero-title .burger{color:var(--mostaza)}
+.hero-sub{font-family:'Pacifico',cursive;color:var(--celeste);font-size:clamp(1.3rem,4.2vw,2.1rem);
+  margin-top:12px;transform:rotate(-3deg);text-shadow:0 4px 16px rgba(0,0,0,.5)}
+
+/* medallón con hamburguesa real */
+.hero-photo{position:relative;width:min(360px,74vw);aspect-ratio:1;margin:34px auto 6px;border-radius:50%;
+  overflow:hidden;border:7px solid var(--kraft);box-shadow:0 22px 60px rgba(0,0,0,.6),0 0 0 3px rgba(232,148,46,.35);
+  will-change:transform}
+.hero-photo img,.hero-photo svg{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.hero-photo::after{content:"";position:absolute;inset:0;border-radius:50%;
+  box-shadow:inset 0 -22px 44px rgba(20,12,6,.28),inset 0 8px 22px rgba(255,220,160,.18)}
+.hero-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.hero-tags a{background:var(--mostaza);color:var(--espresso);font-weight:600;padding:13px 26px;border-radius:999px;
+  transition:transform .15s,filter .2s;font-size:1.02rem}
+.hero-tags a.ghost{background:transparent;color:var(--crema);border:1px solid rgba(246,239,226,.4)}
+.hero-tags a:hover{transform:translateY(-2px);filter:brightness(1.05)}
+
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:7px;font-size:.72rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--kraft);opacity:.8}
+/* en pantallas bajas: achicar la foto para que el hero respire */
+@media(max-height:820px){.hero-photo{width:min(260px,58vw)}}
+@media(max-height:680px){.hero-photo{width:min(200px,46vw)}.scroll-hint{display:none}}
+.scroll-hint .mouse{width:24px;height:38px;border:2px solid var(--kraft);border-radius:14px;position:relative}
+.scroll-hint .mouse::after{content:"";position:absolute;top:7px;left:50%;width:4px;height:7px;background:var(--kraft);
+  border-radius:2px;transform:translateX(-50%);animation:wheel 1.4s infinite}
+@keyframes wheel{0%{opacity:1;top:7px}100%{opacity:0;top:18px}}
+
+/* ============================================================
+   SECCIONES
+   ============================================================ */
+.sec-head{text-align:center;margin:0 auto 44px;max-width:680px;padding:0 12px}
+.sec-kicker{font-family:'Pacifico',cursive;color:var(--mostaza-2);font-size:1.4rem;transform:rotate(-2deg);display:inline-block}
+.sec-title{font-size:clamp(2.1rem,6vw,3.5rem);letter-spacing:-1px;margin-top:6px}
+.sec-note{color:#b8a488;margin-top:10px;font-size:1rem}
+.menu-section{background:var(--bg-2)}
+
+/* tabs de categoría */
+.cat-tabs{display:flex;gap:10px;justify-content:flex-start;flex-wrap:nowrap;margin-bottom:38px;overflow-x:auto;
+  padding:6px 4px 12px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.cat-tabs::-webkit-scrollbar{height:5px}
+.cat-tabs::-webkit-scrollbar-thumb{background:rgba(232,148,46,.5);border-radius:3px}
+.cat-tab{border:1px solid rgba(246,239,226,.2);background:transparent;color:var(--texto);font-size:.98rem;font-weight:600;
+  padding:11px 20px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .2s;flex:none}
+.cat-tab:hover{border-color:var(--mostaza)}
+.cat-tab.active{background:var(--mostaza);color:var(--espresso);border-color:var(--mostaza)}
+.cat-tab.mundial.active{background:linear-gradient(90deg,var(--celeste),var(--navy));color:#fff;border-color:transparent}
+
+.cat-block{display:none}
+.cat-block.show{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cat-banner{display:flex;align-items:center;gap:14px;justify-content:center;margin:-6px 0 30px;flex-wrap:wrap;text-align:center}
+.cat-banner .pill{background:linear-gradient(90deg,var(--celeste),var(--navy));color:#fff;font-weight:600;
+  padding:8px 18px;border-radius:999px;font-size:.9rem;letter-spacing:.5px;box-shadow:0 6px 18px rgba(38,64,123,.4)}
+.cat-banner .note{color:#cbb79c;font-size:.95rem}
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+@media(max-width:520px){.menu-grid{grid-template-columns:1fr;gap:18px}}
+
+.item{background:linear-gradient(180deg,var(--card),var(--bg-2));border:1px solid rgba(246,239,226,.08);
+  border-radius:var(--radio);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.item:hover{transform:translateY(-4px);border-color:rgba(232,148,46,.5)}
+.item.mundial{border-color:rgba(124,179,224,.35)}
+.item.sinstock{opacity:.6}
+.item-photo{position:relative;aspect-ratio:4/3;overflow:hidden;background:#1a110a}
+.item-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.item:hover .item-photo img{transform:scale(1.05)}
+.item-photo .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  background:radial-gradient(circle at 50% 35%,#3a2415,#1a110a);color:var(--kraft)}
+.item-photo .ph span{font-size:2.6rem}
+.item-photo .ph b{font-weight:600;font-size:.95rem}
+.item-photo .badge{position:absolute;top:12px;left:12px;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;
+  background:linear-gradient(90deg,var(--celeste),var(--navy));color:#fff;padding:5px 11px;border-radius:999px;font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.item-photo .badge.stock{background:var(--tomate)}
+.item-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.item-body h3{font-size:1.3rem;color:var(--crema)}
+.item-body p{font-size:.9rem;color:#c3ae92;flex:1;line-height:1.45}
+
+/* selector de tamaño */
+.variants{display:flex;gap:8px;flex-wrap:wrap}
+.variant{border:1px solid rgba(246,239,226,.22);border-radius:11px;padding:8px 12px;cursor:pointer;text-align:center;
+  transition:all .18s;min-width:64px;flex:1}
+.variant:hover{border-color:var(--mostaza)}
+.variant.sel{background:var(--mostaza);color:var(--espresso);border-color:var(--mostaza)}
+.variant .vl{display:block;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.variant .vp{display:block;font-size:.92rem;font-weight:600;margin-top:2px}
+.variant.sel .vp{color:var(--espresso)}
+
+.add-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
+.add-btn{background:var(--mostaza);color:var(--espresso);border:0;border-radius:11px;padding:11px 16px;font-weight:700;
+  cursor:pointer;flex:1;transition:transform .15s,filter .2s;font-size:.98rem}
+.add-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button{width:34px;height:34px;border-radius:50%;border:1px solid rgba(246,239,226,.25);background:transparent;
+  color:var(--texto);font-size:1.25rem;cursor:pointer;line-height:1;transition:all .15s}
+.qty button:hover{background:var(--mostaza);color:var(--espresso);border-color:var(--mostaza)}
+.qty span{min-width:22px;text-align:center;font-weight:700;font-size:1.05rem}
+.nostock-txt{color:var(--tomate);font-weight:600;text-align:center;padding:8px;font-size:.95rem}
+
+/* ============================================================
+   REELS — corren constantemente, click abre Instagram
+   ============================================================ */
+.reels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:900px;margin:0 auto}
+@media(max-width:520px){.reels-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+.reel{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;border:1px solid rgba(246,239,226,.12);
+  cursor:pointer;display:block;box-shadow:var(--sombra);transition:transform .25s;background:#120b06}
+.reel:hover{transform:translateY(-6px)}
+.reel video,.reel .kb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel .kb{background-size:cover;background-position:center;animation:kenburns 16s ease-in-out infinite alternate}
+@keyframes kenburns{0%{transform:scale(1.05) translate(0,0)}100%{transform:scale(1.22) translate(-3%,-4%)}}
+.reel .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 40%,rgba(18,11,6,.9))}
+.reel .ig{position:absolute;top:12px;right:12px;width:26px;height:26px;opacity:.95;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
+.reel .live{position:absolute;top:13px;left:12px;display:flex;align-items:center;gap:5px;font-size:.66rem;font-weight:700;
+  letter-spacing:1px;color:#fff;background:rgba(200,69,47,.9);padding:3px 8px;border-radius:999px}
+.reel .live i{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.3}}
+.reel .meta{position:absolute;left:14px;right:14px;bottom:14px}
+.reel .meta .cap{font-size:.9rem;color:var(--crema);font-weight:600;line-height:1.25}
+.reel .meta .go{font-size:.76rem;color:var(--celeste);margin-top:5px;display:flex;align-items:center;gap:5px}
+.reels-note{text-align:center;margin-top:26px;color:#b8a488;font-size:.92rem}
+
+/* ============================================================
+   PEDIDO
+   ============================================================ */
+.order-section{background:var(--bg-2)}
+.order-wrap{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+@media(max-width:880px){.order-wrap{grid-template-columns:1fr}}
+.panel{background:linear-gradient(180deg,var(--card),var(--bg-2));border:1px solid rgba(246,239,226,.1);
+  border-radius:24px;padding:26px}
+.status{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;margin-bottom:20px;font-weight:600}
+.status.open{background:rgba(127,174,84,.16);color:#b6dd8f;border:1px solid rgba(127,174,84,.4)}
+.status.closed{background:rgba(200,69,47,.16);color:#e79b8d;border:1px solid rgba(200,69,47,.4)}
+.status .pulse{width:12px;height:12px;border-radius:50%;flex:none}
+.status.open .pulse{background:var(--verde);animation:pulse 1.6s infinite}
+.status.closed .pulse{background:var(--tomate)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(127,174,84,.5)}70%{box-shadow:0 0 0 12px rgba(127,174,84,0)}100%{box-shadow:0 0 0 0 rgba(127,174,84,0)}}
+.hours{font-size:.95rem;color:#cbb79c;line-height:1.7}
+.hours strong{color:var(--crema)}
+.hours .clock{font-size:2.3rem;color:var(--mostaza-2);font-weight:700;display:block;margin-top:4px}
+
+label{display:block;font-size:.9rem;margin:15px 0 7px;color:var(--kraft);font-weight:500}
+input,select{width:100%;padding:13px 15px;border-radius:12px;border:1px solid rgba(246,239,226,.2);
+  background:rgba(0,0,0,.22);color:var(--texto);font-family:inherit;font-size:16px;transition:border-color .2s}
+input:focus,select:focus{outline:none;border-color:var(--mostaza)}
+input::placeholder{color:#8c7a63}
+.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.pay{border:1px solid rgba(246,239,226,.2);border-radius:12px;padding:14px;text-align:center;cursor:pointer;
+  transition:all .2s;font-weight:600}
+.pay:hover{border-color:var(--mostaza)}
+.pay.sel{background:var(--mostaza);color:var(--espresso);border-color:var(--mostaza)}
+.pay small{display:block;font-weight:400;font-size:.75rem;opacity:.8;margin-top:2px}
+.transfer-box{background:var(--navy-2);border:1px solid var(--celeste);border-radius:14px;padding:16px;margin-top:14px;display:none}
+.transfer-box.show{display:block;animation:fade .3s}
+.transfer-box .alias-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}
+.transfer-box .alias{font-size:1.35rem;font-weight:700;color:var(--celeste)}
+.copy-btn{background:var(--celeste);color:var(--navy-2);border:0;border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:.85rem}
+.transfer-box .warn{font-size:.85rem;color:#ffd9a1;display:flex;gap:8px;margin-top:8px}
+
+.summary{margin-top:4px}
+.summary .line{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dashed rgba(246,239,226,.15);font-size:.94rem}
+.summary .line .n{color:#cbb79c}
+.summary .line .rm{color:var(--tomate);cursor:pointer;margin-left:8px;font-weight:700}
+.summary .empty{color:#8c7a63;font-size:.92rem;padding:16px 0;text-align:center}
+.summary .total{display:flex;justify-content:space-between;padding-top:14px;font-size:1.2rem;font-weight:700}
+.summary .total .amt{color:var(--mostaza-2)}
+.send-btn{width:100%;margin-top:20px;padding:17px;border:0;border-radius:14px;cursor:pointer;background:#25d366;color:#062b12;
+  font-weight:700;font-size:1.08rem;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,filter .2s}
+.send-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.send-btn svg{width:24px;height:24px;fill:currentColor}
+.form-note{font-size:.82rem;color:#9b886c;text-align:center;margin-top:12px}
+.err{color:#e79b8d;font-size:.88rem;margin-top:10px;display:none}
+.err.show{display:block}
+
+/* botón carrito flotante (mobile) */
+.cart-fab{position:fixed;right:16px;bottom:16px;z-index:45;background:var(--mostaza);color:var(--espresso);
+  border:0;border-radius:999px;padding:14px 20px;font-weight:700;font-size:1rem;box-shadow:var(--sombra);cursor:pointer;
+  display:none;align-items:center;gap:9px;transform:translateY(120px);transition:transform .3s}
+.cart-fab.show{display:flex;transform:translateY(0)}
+.cart-fab .count{background:var(--espresso);color:var(--mostaza);border-radius:999px;min-width:24px;height:24px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;padding:0 6px}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px solid rgba(246,239,226,.08)}
+.foot-logo{display:inline-flex;align-items:center;gap:12px;font-size:1.5rem;font-weight:700;margin-bottom:14px}
+.foot-logo svg{width:44px;height:44px}
+.foot-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin:16px 0;color:var(--kraft)}
+.foot-links a:hover{color:var(--mostaza-2)}
+.foot-hours{color:#b8a488;font-size:.95rem;margin-top:8px}
+.foot-copy{color:#7a6a54;font-size:.82rem;margin-top:20px}
+
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(140px);background:var(--espresso-2);
+  color:var(--crema);padding:13px 22px;border-radius:12px;box-shadow:var(--sombra);z-index:100;transition:transform .35s;
+  border:1px solid var(--mostaza);font-weight:500;max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#d9c2a3"/><g fill="none" stroke="#3b2718" stroke-width="5" stroke-linecap="round"><path d="M22 40 Q30 27 38 40 Q46 27 54 40 Q62 27 70 40 Q76 33 78 40"/><rect x="24" y="46" width="52" height="9" rx="4" fill="#e8942e" stroke="none"/><path d="M24 63 Q50 76 76 63"/></g></svg>
+    MONU BURGER
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu" onclick="closeNav()">Menú</a>
+    <a href="#reels" onclick="closeNav()">Reels</a>
+    <a href="#pedido" onclick="closeNav()">Horarios</a>
+    <a href="#pedido" class="nav-cta" onclick="closeNav()">Hacer pedido</a>
+  </div>
+  <button class="nav-burger" onclick="toggleNav()" aria-label="Abrir menú">☰</button>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <span class="hero-badge"><span class="dot" id="heroDot"></span><span id="heroBadgeTxt">Todos los días · 19:30 a 00:00</span></span>
+    <h1 class="hero-title"><span class="monu">MONU</span><span class="burger">BURGER</span></h1>
+    <p class="hero-sub">Más que una burger</p>
+
+    <div class="hero-photo" id="heroPhoto" role="img" aria-label="Logo de MONU BURGER">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#d9c2a3"/><g fill="none" stroke="#3b2718" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40 Q28 26 36 40 Q44 26 52 40 Q60 26 68 40 Q76 26 80 40"/><rect x="22" y="46" width="56" height="10" rx="5" fill="#e8942e" stroke="none"/><path d="M22 64 Q50 79 78 64"/></g></svg>
+    </div>
+
+    <div class="hero-tags">
+      <a href="#menu">Ver el menú 🍔</a>
+      <a href="#pedido" class="ghost">Pedir por WhatsApp</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="mouse"></div><span>Scroll</span></div>
+</header>
+
+<!-- MENÚ -->
+<section class="pad menu-section" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">nuestro menú</span>
+      <h2 class="sec-title">Elegí tu favorita</h2>
+      <p class="sec-note">Simple, doble o triple · las hamburguesas incluyen papas fritas</p>
+    </div>
+    <div class="cat-tabs" id="catTabs"></div>
+    <div id="catBlocks"></div>
+  </div>
+</section>
+
+<!-- REELS -->
+<section class="pad" id="reels">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">en movimiento</span>
+      <h2 class="sec-title">Nuestros reels</h2>
+      <p class="sec-note">Tocá cualquiera para verlo en Instagram <strong>@_monuburger</strong></p>
+    </div>
+    <div class="reels-grid" id="reelsGrid"></div>
+    <p class="reels-note">🎬 Corren en loop · el video real se abre en Instagram</p>
+  </div>
+</section>
+
+<!-- PEDIDO -->
+<section class="pad order-section" id="pedido">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-kicker">hacé tu pedido</span>
+      <h2 class="sec-title">Encargá por WhatsApp</h2>
+    </div>
+    <div class="order-wrap">
+      <div>
+        <div class="panel" style="margin-bottom:22px">
+          <div class="status" id="statusBox"><span class="pulse"></span><span id="statusTxt">Verificando horario…</span></div>
+          <div class="hours"><strong>Horario de atención</strong><span class="clock">19:30 – 00:00</span>Todos los días · Salón &amp; Delivery 🛵</div>
+        </div>
+        <div class="panel">
+          <h3 style="font-size:1.3rem;margin-bottom:8px;color:var(--crema)">Tu pedido</h3>
+          <div class="summary" id="summary"></div>
+        </div>
+      </div>
+      <div class="panel" id="formPanel">
+        <label for="fName">Nombre y apellido *</label>
+        <input id="fName" type="text" placeholder="Ej: Juan Pérez" autocomplete="name">
+        <label for="fPhone">Número de celular *</label>
+        <input id="fPhone" type="tel" placeholder="Ej: 11 2345 6789" autocomplete="tel" inputmode="tel">
+        <label>Forma de pago *</label>
+        <div class="pay-opts">
+          <div class="pay" data-pay="Efectivo" onclick="selectPay(this)">💵 Efectivo<small>Al recibir</small></div>
+          <div class="pay" data-pay="Transferencia" onclick="selectPay(this)">🏦 Transferencia<small>Alias Pipo.monu</small></div>
+        </div>
+        <div class="transfer-box" id="transferBox">
+          <div>Transferí a nuestro alias:</div>
+          <div class="alias-row"><span class="alias" id="aliasTxt">Pipo.monu</span><button class="copy-btn" type="button" onclick="copyAlias()">Copiar</button></div>
+          <div class="warn">⚠️ <span>Importante: enviá el <strong>comprobante de transferencia</strong> por WhatsApp para confirmar tu pedido.</span></div>
+        </div>
+        <p class="err" id="errBox"></p>
+        <button class="send-btn" id="sendBtn" onclick="sendOrder()">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.907z"/></svg>
+          Enviar pedido por WhatsApp
+        </button>
+        <p class="form-note">Se abrirá WhatsApp con tu pedido listo para enviar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#d9c2a3"/><g fill="none" stroke="#3b2718" stroke-width="5" stroke-linecap="round"><path d="M22 40 Q30 27 38 40 Q46 27 54 40 Q62 27 70 40 Q76 33 78 40"/><rect x="24" y="46" width="52" height="9" rx="4" fill="#e8942e" stroke="none"/><path d="M24 63 Q50 76 76 63"/></g></svg>
+      MONU BURGER
+    </div>
+    <div class="foot-links">
+      <a href="https://www.instagram.com/_monuburger/" target="_blank" rel="noopener">Instagram @_monuburger</a>
+      <a href="#menu">Menú</a>
+      <a href="#pedido">Hacer pedido</a>
+    </div>
+    <p class="foot-hours">Abierto todos los días de <strong>19:30 a 00:00</strong> · Delivery 🛵</p>
+    <p class="foot-copy">© <span id="year"></span> MONU BURGER · Más que una burger</p>
+  </div>
+</footer>
+
+<button class="cart-fab" id="cartFab" onclick="goToOrder()">🛒 Ver pedido <span class="count" id="cartCount">0</span></button>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   ⚙️  CONFIGURACIÓN — COMPLETAR ANTES DE PUBLICAR
+   ===================================================================== */
+const CONFIG = {
+  // 👉 WhatsApp de la hamburguesería (formato internacional, sin + ni espacios)
+  //    Argentina: 54 9 + cód. de área + número. Ej: "5491123456789"
+  whatsapp: "5491100000000",   // <=== REEMPLAZAR POR EL NÚMERO REAL DE MONU BURGER
+  alias: "Pipo.monu",
+  moneda: "$",
+  horario: { desde:[19,30], hasta:[24,0] }   // 19:30 a 00:00
+};
+
+/* =====================================================================
+   MENÚ REAL (extraído de pedidodirecto.app/monuburger)
+   v: variantes [etiqueta, precio].  img:"" => placeholder de marca.
+   ===================================================================== */
+const MENU = [
+  { cat:"Burger del Mundial", mundial:true, note:"¡Edición limitada! 🇦🇷", items:[
+    {n:"Kansas", d:"Medallón de carne, provoleta, mayonesa de chimi y salsa criolla.", img:"img/kansas.jpg", v:[["Simple",13500],["Doble",15500]]},
+    {n:"N. Jersey", d:"Medallón de carne, cheddar, bacon en cubos tiernizado y mayonesa ahumada.", img:"img/njersey.jpg", v:[["Simple",13500],["Doble",15500]]},
+    {n:"Combo Ulti Para Atajar", d:"N. Jersey simple + Kansas simple + 1 porción de papas.", img:"img/combo-atajar.jpg", v:[["Combo",19500]]},
+  ]},
+  { cat:"Hamburguesas", note:"Incluyen papas fritas 🍟", items:[
+    {n:"Cheese", d:"Carne, cheddar, salsa monu.", img:"img/cheese.jpg", v:[["Simple",11000],["Doble",13500],["Triple",15500]]},
+    {n:"Bacon", d:"Carne, cheddar, bacon, salsa monu.", img:"img/bacon.jpg", v:[["Simple",12000],["Doble",14500],["Triple",16500]]},
+    {n:"Crispy", d:"Carne, cheddar, bacon, cebolla crispy, alioli.", img:"img/crispy.jpg", v:[["Simple",13000],["Doble",15500],["Triple",17500]]},
+    {n:"Monulibra", d:"Carne, cheddar, cebolla en cubos, ketchup, mostaza.", img:"img/monulibra.jpg", v:[["Simple",13000],["Doble",15500],["Triple",17500]]},
+    {n:"La Típica", d:"Carne, cheddar, lechuga, tomate, mayonesa.", img:"img/tipica.jpg", v:[["Simple",12500],["Doble",15000],["Triple",17000]]},
+    {n:"Monuburger", d:"Carne, cheddar, cebolla caramelizada, bacon, huevo, barbacoa.", img:"img/monuburger.jpg", v:[["Simple",14000],["Doble",16500],["Triple",18500]]},
+    {n:"Baconhoma", d:"Carne smasheada con cebolla cruda, cheddar, bacon, salsa monu.", img:"img/baconhoma.jpg", v:[["Simple",14000],["Doble",16500],["Triple",18500]]},
+    {n:"Oklahoma", d:"Carne smasheada con cebolla cruda, cheddar, salsa monu.", img:"img/oklahoma.jpg", v:[["Simple",13500],["Doble",16000],["Triple",18000]]},
+    {n:"18 Supermash", d:"Carne smasheada, cheddar, panceta, pepinillo, salsa smash.", img:"img/supermash.jpg", v:[["Simple",14000],["Doble",16500],["Triple",18500]]},
+    {n:"Witcher", d:"Carne, cheddar, bacon, tomate, lechuga, cebolla, pepinillos, mayonesa, ketchup.", img:"img/witcher.jpg", v:[["Simple",13500],["Doble",16000],["Triple",18000]]},
+    {n:"Provoteca", d:"Carne, provoleta, cebolla caramelizada, rúcula, alioli.", img:"img/provoteca.jpg", v:[["Simple",12500],["Doble",15000],["Triple",17000]]},
+    {n:"Big Monu", d:"Carne, cheddar, cebolla, lechuga, pepinillos, salsa monu.", img:"img/bigmonu.jpg", v:[["Simple",13000],["Doble",15500],["Triple",17500]]},
+    {n:"Not Monu", d:"Medallón NotCo, cheddar, mayonesa.", img:"img/notmonu.jpg", v:[["Simple",13500],["Doble",16000],["Triple",18000]]},
+    {n:"Tipiteca", d:"Carne, provoleta, tomate, rúcula, mayonesa.", img:"", v:[["Simple",12500],["Doble",15000],["Triple",17000]]},
+  ]},
+  { cat:"Combos", items:[
+    {n:"Monulibra doble + Cheese simple + Papas", d:"2 hamburguesas + 1 porción de papas.", img:"", v:[["Combo",23000]]},
+    {n:"Cheese doble + Monulibra simple + Papas", d:"2 hamburguesas + 1 porción de papas.", img:"", v:[["Combo",23000]]},
+    {n:"Nuggets + Papas Fritas", d:"Combo para compartir.", img:"img/nuggetspapas.png", stock:false, v:[["Combo",0]]},
+  ]},
+  { cat:"Burger del Repar", note:"No incluyen papas", items:[
+    {n:"KECO", d:"Una carne smasheada, cheddar, cebolla crispy y alioli.", img:"img/keco.jpg", v:[["Unidad",9500]]},
+    {n:"CITO", d:"Un medallón de carne, cheddar, cebolla en cubos, ketchup, mostaza, bacon.", img:"img/cito.jpg", v:[["Unidad",9500]]},
+    {n:"Tino Andino", d:"Un medallón de carne, provoleta en medallón, cheddar en pan y mayonesa.", img:"img/tino.jpg", v:[["Unidad",9500]]},
+    {n:"Santi", d:"Un medallón de carne, cheddar, cebolla crispy, lechuga y alioli.", img:"img/santi.jpg", v:[["Unidad",9500]]},
+  ]},
+  { cat:"Para picar", items:[
+    {n:"Nuggets", d:"10 unidades. Incluye 2 dips (salsa monu y barbacoa).", img:"img/nuggets.png", v:[["Unidad",11000]]},
+    {n:"Papas Fritas", d:"Porción.", img:"img/papas.png", stock:false, v:[["Unidad",0]]},
+  ]},
+  { cat:"Bebidas", items:[
+    {n:"Coca Cola 500ml", d:"Botella 500ml.", img:"img/coca.png", v:[["Unidad",2200]]},
+    {n:"Sprite 500ml", d:"Botella 500ml.", img:"img/sprite.png", v:[["Unidad",2200]]},
+    {n:"Fanta 500ml", d:"Botella 500ml.", img:"img/fanta.png", v:[["Unidad",2200]]},
+  ]},
+  { cat:"Postres", items:[
+    {n:"Cheesecake", d:"Porción individual.", img:"img/cheesecake.jpg", v:[["Unidad",5300]]},
+    {n:"Oreo", d:"Postre Oreo.", img:"", v:[["Unidad",5300]]},
+    {n:"Chocotorta", d:"La clásica, bien argentina.", img:"img/chocotorta.jpg", v:[["Unidad",5300]]},
+  ]},
+  { cat:"Salsas", items:[
+    {n:"Monu", d:"Nuestra salsa de la casa.", img:"", v:[["Unidad",1000]]},
+    {n:"Alioli", d:"", img:"img/alioli.png", v:[["Unidad",1000]]},
+    {n:"Barbacoa", d:"", img:"img/barbacoa.png", v:[["Unidad",1000]]},
+    {n:"Mayonesa", d:"", img:"img/mayonesa.png", v:[["Unidad",1000]]},
+    {n:"Ketchup", d:"", img:"img/ketchup.png", v:[["Unidad",1000]]},
+    {n:"Mostaza", d:"", img:"img/mostaza.png", v:[["Unidad",1000]]},
+  ]},
+];
+
+/* =====================================================================
+   REELS — links reales. Si colocás archivos en reels/ se reproducen
+   como video real (autoplay, en loop). Si no existen, corre la foto.
+   ===================================================================== */
+const REELS = [
+  {video:"reels/1.mp4", poster:"img/njersey.jpg",   cap:"Burger Nueva Jersey 🇦🇷", url:"https://www.instagram.com/_monuburger/reel/DZalaiXsOeT/"},
+  {video:"reels/2.mp4", poster:"img/kansas.jpg",     cap:"Burger Kansas ⭐",         url:"https://www.instagram.com/_monuburger/p/DZamGa1lQai/"},
+  {video:"reels/3.mp4", poster:"img/witcher.jpg",    cap:"Witcher a full 🔥",        url:"https://www.instagram.com/_monuburger/p/DZalH7tFUzA/"},
+  {video:"reels/4.mp4", poster:"img/monuburger.jpg", cap:"La Monuburger 🍳",         url:"https://www.instagram.com/_monuburger/"},
+];
+
+/* =====================================================================
+   ESTADO / HELPERS
+   ===================================================================== */
+const order = {};                 // key -> {name,variant,price,qty}
+const fmt = n => CONFIG.moneda + n.toLocaleString('es-AR');
+const slug = s => s.replace(/[^a-zA-Z0-9]/g,'_');
+
+/* ---------- MENÚ ---------- */
+function buildMenu(){
+  const tabs=document.getElementById('catTabs');
+  const blocks=document.getElementById('catBlocks');
+  MENU.forEach((group,gi)=>{
+    const btn=document.createElement('button');
+    btn.className='cat-tab'+(group.mundial?' mundial':'')+(gi===0?' active':'');
+    btn.textContent=group.cat;
+    btn.onclick=()=>showCat(gi,btn);
+    tabs.appendChild(btn);
+
+    const block=document.createElement('div');
+    block.className='cat-block'+(gi===0?' show':'');
+    block.dataset.g=gi;
+    if(group.note || group.mundial){
+      block.innerHTML=`<div class="cat-banner">${group.mundial?'<span class="pill">🏆 EDICIÓN MUNDIAL</span>':''}${group.note?`<span class="note">${group.note}</span>`:''}</div>`;
+    }
+    const grid=document.createElement('div');
+    grid.className='menu-grid';
+    group.items.forEach((it,ii)=>grid.appendChild(card(it,gi,ii,group.mundial)));
+    block.appendChild(grid);
+    blocks.appendChild(block);
+  });
+}
+function card(it,gi,ii,mundial){
+  const id=`${gi}_${ii}`;
+  const multi=it.v.length>1;
+  const el=document.createElement('div');
+  el.className='item'+(mundial?' mundial':'')+(it.stock===false?' sinstock':'');
+  const photo = it.img
+    ? `<img src="${it.img}" alt="${it.n}" loading="lazy">`
+    : `<div class="ph"><span>🍔</span><b>${it.n}</b></div>`;
+  const badge = mundial ? `<span class="badge">Mundial</span>` : (it.stock===false?`<span class="badge stock">Sin stock</span>`:'');
+  const variants = multi
+    ? `<div class="variants">${it.v.map((v,k)=>`<div class="variant${k===0?' sel':''}" data-k="${k}" onclick="pickVar('${id}',${k})"><span class="vl">${v[0]}</span><span class="vp">${fmt(v[1])}</span></div>`).join('')}</div>`
+    : `<div class="variants"><div class="variant sel" data-k="0"><span class="vl">${it.v[0][0]}</span><span class="vp">${fmt(it.v[0][1])}</span></div></div>`;
+  const action = it.stock===false
+    ? `<div class="nostock-txt">Sin stock por ahora</div>`
+    : `<div class="add-row" id="act_${id}"><button class="add-btn" onclick="addItem('${id}')">Agregar</button></div>`;
+  el.innerHTML=`
+    <div class="item-photo">${photo}${badge}</div>
+    <div class="item-body">
+      <h3>${it.n}</h3>
+      ${it.d?`<p>${it.d}</p>`:'<p></p>'}
+      ${variants}
+      ${action}
+    </div>`;
+  el.dataset.sel="0";
+  return el;
+}
+window.__cards={};
+function itemByyId(id){const[g,i]=id.split('_').map(Number);return MENU[g].items[i];}
+function pickVar(id,k){
+  const block=document.querySelector(`#act_${id}`).closest('.item');
+  block.dataset.sel=k;
+  block.querySelectorAll('.variant').forEach(v=>v.classList.toggle('sel',+v.dataset.k===k));
+  // si ya está en el carrito con otra variante, refrescar botón
+  renderAction(id);
+}
+function keyFor(id,k){return id+'|'+k;}
+function addItem(id){
+  const it=itemByyId(id);
+  const block=document.querySelector(`#act_${id}`).closest('.item');
+  const k=+block.dataset.sel;
+  const key=keyFor(id,k);
+  const[label,price]=it.v[k];
+  if(order[key]) order[key].qty++;
+  else order[key]={name:it.n,variant:label,price,qty:1};
+  renderAction(id);renderSummary();toast(`${it.n} agregada ✅`);
+}
+function changeQty(id,k,delta){
+  const key=keyFor(id,k);
+  if(!order[key]) return;
+  order[key].qty+=delta;
+  if(order[key].qty<=0) delete order[key];
+  renderAction(id);renderSummary();
+}
+function renderAction(id){
+  const row=document.getElementById('act_'+id);
+  if(!row) return;
+  const block=row.closest('.item');
+  const k=+block.dataset.sel;
+  const key=keyFor(id,k);
+  const inCart=order[key];
+  if(inCart){
+    row.innerHTML=`<div class="qty" style="margin:0 auto">
+      <button aria-label="Quitar" onclick="changeQty('${id}',${k},-1)">−</button>
+      <span>${inCart.qty}</span>
+      <button aria-label="Agregar" onclick="changeQty('${id}',${k},1)">+</button></div>`;
+  }else{
+    row.innerHTML=`<button class="add-btn" onclick="addItem('${id}')">Agregar</button>`;
+  }
+}
+function showCat(gi,btn){
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-block').forEach(b=>b.classList.toggle('show',+b.dataset.g===gi));
+}
+
+/* ---------- RESUMEN / CARRITO ---------- */
+function renderSummary(){
+  const box=document.getElementById('summary');
+  const items=Object.entries(order);
+  const count=items.reduce((a,[,it])=>a+it.qty,0);
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('cartFab').classList.toggle('show',count>0);
+  if(!items.length){box.innerHTML='<p class="empty">Todavía no agregaste productos.<br>Elegí desde el menú ☝️</p>';return;}
+  let total=0;
+  box.innerHTML=items.map(([key,it])=>{
+    const sub=it.price*it.qty;total+=sub;
+    const vlabel=(it.variant&&it.variant!=='Unidad'&&it.variant!=='Combo')?` (${it.variant})`:'';
+    return `<div class="line"><span class="n">${it.qty}× ${it.name}${vlabel}</span><span>${fmt(sub)}<span class="rm" title="Quitar" onclick="removeKey('${key}')">✕</span></span></div>`;
+  }).join('')+`<div class="total"><span>Total</span><span class="amt">${fmt(total)}</span></div>`;
+}
+function removeKey(key){
+  delete order[key];
+  const[id]=key.split('|');
+  renderAction(id);renderSummary();
+}
+function goToOrder(){document.getElementById('pedido').scrollIntoView({behavior:'smooth'});}
+
+/* ---------- REELS ---------- */
+function buildReels(){
+  const g=document.getElementById('reelsGrid');
+  REELS.forEach(r=>{
+    const a=document.createElement('a');
+    a.className='reel';a.href=r.url;a.target='_blank';a.rel='noopener';
+    a.innerHTML=`
+      <video muted loop autoplay playsinline preload="none" poster="${r.poster}">
+        <source src="${r.video}" type="video/mp4">
+      </video>
+      <div class="kb" style="background-image:url('${r.poster}')"></div>
+      <div class="ov"></div>
+      <span class="live"><i></i>REEL</span>
+      <svg class="ig" viewBox="0 0 24 24" fill="#f6efe2"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 3.68A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1116 12a4 4 0 01-4 4zm6.4-10.4a1.44 1.44 0 11-1.44-1.44 1.44 1.44 0 011.44 1.44z"/></svg>
+      <div class="meta"><div class="cap">${r.cap}</div><div class="go">▶ Ver en Instagram</div></div>`;
+    const vid=a.querySelector('video'), kb=a.querySelector('.kb');
+    // si el video no carga, dejamos la foto en movimiento (Ken Burns)
+    vid.addEventListener('error',()=>{vid.style.display='none';kb.style.display='block';},true);
+    vid.querySelector('source').addEventListener('error',()=>{vid.style.display='none';kb.style.display='block';});
+    kb.style.display='none';
+    g.appendChild(a);
+    // arranque robusto: si a los 1.2s no hay datos, mostramos la foto
+    setTimeout(()=>{ if(vid.readyState<2){vid.style.display='none';kb.style.display='block';} },1200);
+    vid.play?.().catch(()=>{});
+  });
+}
+
+/* ---------- PAGO ---------- */
+let payMethod=null;
+function selectPay(el){
+  document.querySelectorAll('.pay').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');payMethod=el.dataset.pay;
+  document.getElementById('transferBox').classList.toggle('show',payMethod==='Transferencia');
+}
+function copyAlias(){navigator.clipboard?.writeText(CONFIG.alias).then(()=>toast('Alias copiado: '+CONFIG.alias));}
+
+/* ---------- HORARIO ---------- */
+function isOpen(){
+  const n=new Date();const m=n.getHours()*60+n.getMinutes();
+  const f=CONFIG.horario.desde[0]*60+CONFIG.horario.desde[1];
+  const t=CONFIG.horario.hasta[0]*60+CONFIG.horario.hasta[1];
+  return m>=f&&m<t;
+}
+function refreshStatus(){
+  const open=isOpen();
+  const box=document.getElementById('statusBox'),txt=document.getElementById('statusTxt');
+  box.className='status '+(open?'open':'closed');
+  txt.textContent=open?'Abierto ahora — ¡hacé tu pedido!':'Cerrado ahora · Abrimos 19:30';
+  const dot=document.getElementById('heroDot');
+  dot.style.background=open?'var(--verde)':'var(--tomate)';
+  dot.style.boxShadow=open?'0 0 10px var(--verde)':'none';
+  document.getElementById('heroBadgeTxt').textContent=open?'Abierto ahora · Cerramos 00:00':'Todos los días · 19:30 a 00:00';
+}
+
+/* ---------- ENVÍO A WHATSAPP ---------- */
+function showErr(msg){const e=document.getElementById('errBox');e.textContent=msg;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),4500);}
+function sendOrder(){
+  const name=document.getElementById('fName').value.trim();
+  const phone=document.getElementById('fPhone').value.trim();
+  const items=Object.values(order);
+  if(!name) return showErr('Por favor ingresá tu nombre y apellido.');
+  if(!phone||phone.replace(/\D/g,'').length<6) return showErr('Ingresá un número de celular válido.');
+  if(!payMethod) return showErr('Elegí una forma de pago.');
+  if(!items.length) return showErr('Agregá al menos un producto al pedido.');
+  let total=0;
+  const lines=items.map(it=>{total+=it.price*it.qty;const vl=(it.variant&&it.variant!=='Unidad'&&it.variant!=='Combo')?` (${it.variant})`:'';return `• ${it.qty}× ${it.name}${vl} — ${fmt(it.price*it.qty)}`;});
+  let msg=`¡Hola MONU BURGER! 🍔 Quiero hacer un pedido:\n\n`;
+  msg+=`*Nombre:* ${name}\n*Celular:* ${phone}\n*Pago:* ${payMethod}\n`;
+  if(payMethod==='Transferencia') msg+=`   Alias: ${CONFIG.alias}\n   (Envío el comprobante por WhatsApp) 🧾\n`;
+  msg+=`\n*Pedido:*\n${lines.join('\n')}\n\n*TOTAL: ${fmt(total)}*`;
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
+  toast('Abriendo WhatsApp… ¡Gracias! 🍔');
+}
+
+/* ---------- VARIOS ---------- */
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+function closeNav(){document.getElementById('navLinks').classList.remove('open');}
+let toastT;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2400);}
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',scrollY>40);
+  // parallax suave del medallón (ligado al scroll, no es una animación en loop)
+  const hp=document.getElementById('heroPhoto');
+  if(hp&&scrollY<window.innerHeight) hp.style.transform=`translateY(${scrollY*0.12}px)`;
+},{passive:true});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  buildMenu();buildReels();renderSummary();refreshStatus();
+  setInterval(refreshStatus,60000);
+  document.getElementById('year').textContent=new Date().getFullYear();
+});
+</script>
+</body>
+</html>

@@ -63,7 +63,7 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
    HERO — logo + nombre + HAMBURGUESA REAL (sin animación)
    ============================================================ */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:96px 20px 172px;overflow:hidden}
+  text-align:center;padding:100px 20px 80px;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:url('img/njersey.jpg') center/cover no-repeat;
   transform:scale(1.15);filter:blur(14px) brightness(.42) saturate(1.1)}
 .hero-bg::after{content:"";position:absolute;inset:0;background:
@@ -93,16 +93,9 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 .hero-tags a.ghost{background:transparent;color:var(--crema);border:1px solid rgba(246,239,226,.4)}
 .hero-tags a:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
-.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;
-  display:flex;flex-direction:column;align-items:center;gap:7px;font-size:.72rem;letter-spacing:3px;
-  text-transform:uppercase;color:var(--kraft);opacity:.8}
 /* en pantallas bajas: achicar la foto para que el hero respire */
 @media(max-height:820px){.hero-photo{width:min(260px,58vw)}}
-@media(max-height:680px){.hero-photo{width:min(200px,46vw)}.scroll-hint{display:none}}
-.scroll-hint .mouse{width:24px;height:38px;border:2px solid var(--kraft);border-radius:14px;position:relative}
-.scroll-hint .mouse::after{content:"";position:absolute;top:7px;left:50%;width:4px;height:7px;background:var(--kraft);
-  border-radius:2px;transform:translateX(-50%);animation:wheel 1.4s infinite}
-@keyframes wheel{0%{opacity:1;top:7px}100%{opacity:0;top:18px}}
+@media(max-height:680px){.hero-photo{width:min(200px,46vw)}}
 
 /* ============================================================
    SECCIONES
@@ -243,7 +236,12 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 /* ============================================================
    PEDIDO
    ============================================================ */
-.order-section{background:var(--bg-2)}
+.order-section{background:var(--bg-2);position:relative;overflow:hidden}
+.order-bg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;pointer-events:none;opacity:.05;z-index:0}
+.order-bg svg{width:min(280px,42vw);filter:none}
+.order-bg span{font-size:clamp(2.6rem,11vw,7rem);font-weight:700;letter-spacing:-2px;color:var(--kraft);white-space:nowrap}
+.order-section>.wrap{position:relative;z-index:1}
 .order-wrap{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
 @media(max-width:880px){.order-wrap{grid-template-columns:1fr}}
 .panel{background:linear-gradient(180deg,var(--card),var(--bg-2));border:1px solid rgba(246,239,226,.1);
@@ -353,7 +351,6 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
       <a href="#pedido" class="ghost">Pedir por WhatsApp</a>
     </div>
   </div>
-  <div class="scroll-hint"><div class="mouse"></div><span>Scroll</span></div>
 </header>
 
 <!-- MENÚ -->
@@ -389,6 +386,10 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
 
 <!-- PEDIDO -->
 <section class="pad order-section" id="pedido">
+  <div class="order-bg" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#d9c2a3"/><g fill="none" stroke="#3b2718" stroke-width="5" stroke-linecap="round"><path d="M22 40 Q30 27 38 40 Q46 27 54 40 Q62 27 70 40 Q76 33 78 40"/><rect x="24" y="46" width="52" height="9" rx="4" fill="#e8942e" stroke="none"/><path d="M24 63 Q50 76 76 63"/></g></svg>
+    <span>MONU BURGER</span>
+  </div>
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-kicker">hacé tu pedido</span>
@@ -410,6 +411,15 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
         <input id="fName" type="text" placeholder="Ej: Juan Pérez" autocomplete="name">
         <label for="fPhone">Número de celular *</label>
         <input id="fPhone" type="tel" placeholder="Ej: 11 2345 6789" autocomplete="tel" inputmode="tel">
+        <label>¿Cómo lo querés? *</label>
+        <div class="pay-opts">
+          <div class="pay" data-mode="Take Away" onclick="selectMode(this)">🏬 Take Away<small>Lo retiro yo</small></div>
+          <div class="pay" data-mode="Delivery" onclick="selectMode(this)">🛵 Delivery<small>Envío a domicilio</small></div>
+        </div>
+        <div id="addrBox" style="display:none">
+          <label for="fAddr">Dirección de entrega *</label>
+          <input id="fAddr" type="text" placeholder="Calle y número, piso/depto, entre calles…" autocomplete="street-address">
+        </div>
         <label>Forma de pago *</label>
         <div class="pay-opts">
           <div class="pay" data-pay="Efectivo" onclick="selectPay(this)">💵 Efectivo<small>Al recibir</small></div>
@@ -729,12 +739,17 @@ function buildReels(){
   });
 }
 
-/* ---------- PAGO ---------- */
-let payMethod=null;
+/* ---------- ENTREGA / PAGO ---------- */
+let payMethod=null, orderMode=null;
 function selectPay(el){
-  document.querySelectorAll('.pay').forEach(p=>p.classList.remove('sel'));
+  el.closest('.pay-opts').querySelectorAll('.pay').forEach(p=>p.classList.remove('sel'));
   el.classList.add('sel');payMethod=el.dataset.pay;
   document.getElementById('transferBox').classList.toggle('show',payMethod==='Transferencia');
+}
+function selectMode(el){
+  el.closest('.pay-opts').querySelectorAll('.pay').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');orderMode=el.dataset.mode;
+  document.getElementById('addrBox').style.display = orderMode==='Delivery' ? 'block' : 'none';
 }
 function copyAlias(){navigator.clipboard?.writeText(CONFIG.alias).then(()=>toast('Alias copiado: '+CONFIG.alias));}
 
@@ -762,15 +777,21 @@ function sendOrder(){
   const name=document.getElementById('fName').value.trim();
   const phone=document.getElementById('fPhone').value.trim();
   const notes=document.getElementById('fNotes').value.trim();
+  const addr=document.getElementById('fAddr').value.trim();
   const items=Object.values(order);
   if(!name) return showErr('Por favor ingresá tu nombre y apellido.');
   if(!phone||phone.replace(/\D/g,'').length<6) return showErr('Ingresá un número de celular válido.');
+  if(!orderMode) return showErr('Elegí Take Away o Delivery.');
+  if(orderMode==='Delivery' && !addr) return showErr('Ingresá la dirección de entrega.');
   if(!payMethod) return showErr('Elegí una forma de pago.');
   if(!items.length) return showErr('Agregá al menos un producto al pedido.');
   let total=0;
   const lines=items.map(it=>{total+=it.price*it.qty;const vl=(it.variant&&it.variant!=='Unidad'&&it.variant!=='Combo')?` (${it.variant})`:'';return `• ${it.qty}× ${it.name}${vl} — ${fmt(it.price*it.qty)}`;});
   let msg=`¡Hola MONU BURGER! 🍔 Quiero hacer un pedido:\n\n`;
-  msg+=`*Nombre:* ${name}\n*Celular:* ${phone}\n*Pago:* ${payMethod}\n`;
+  msg+=`*Nombre:* ${name}\n*Celular:* ${phone}\n`;
+  msg+=`*Entrega:* ${orderMode}\n`;
+  if(orderMode==='Delivery') msg+=`*Dirección:* ${addr}\n`;
+  msg+=`*Pago:* ${payMethod}\n`;
   if(payMethod==='Transferencia') msg+=`   Alias: ${CONFIG.alias}\n   (Envío el comprobante por WhatsApp) 🧾\n`;
   msg+=`\n*Pedido:*\n${lines.join('\n')}\n\n*TOTAL: ${fmt(total)}*`;
   if(notes) msg+=`\n\n*Aclaraciones:* ${notes}`;

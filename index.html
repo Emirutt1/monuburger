@@ -238,9 +238,10 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
    ============================================================ */
 .order-section{background:var(--bg-2);position:relative;overflow:hidden}
 .order-bg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:14px;pointer-events:none;opacity:.05;z-index:0}
-.order-bg svg{width:min(280px,42vw);filter:none}
-.order-bg span{font-size:clamp(2.6rem,11vw,7rem);font-weight:700;letter-spacing:-2px;color:var(--kraft);white-space:nowrap}
+  gap:min(2vw,18px);pointer-events:none;opacity:.06;z-index:0}
+.order-bg svg{width:min(58vw,480px);filter:none}
+.order-bg span{font-size:min(30vw,17rem);line-height:.8;font-weight:700;letter-spacing:-4px;
+  color:var(--kraft);text-align:center;white-space:nowrap}
 .order-section>.wrap{position:relative;z-index:1}
 .order-wrap{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
 @media(max-width:880px){.order-wrap{grid-template-columns:1fr}}
@@ -388,7 +389,7 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
 <section class="pad order-section" id="pedido">
   <div class="order-bg" aria-hidden="true">
     <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#d9c2a3"/><g fill="none" stroke="#3b2718" stroke-width="5" stroke-linecap="round"><path d="M22 40 Q30 27 38 40 Q46 27 54 40 Q62 27 70 40 Q76 33 78 40"/><rect x="24" y="46" width="52" height="9" rx="4" fill="#e8942e" stroke="none"/><path d="M24 63 Q50 76 76 63"/></g></svg>
-    <span>MONU BURGER</span>
+    <span>MONU<br>BURGER</span>
   </div>
   <div class="wrap">
     <div class="sec-head">
@@ -505,7 +506,7 @@ const MENU = [
   { cat:"Combos", items:[
     {n:"Monulibra doble + Cheese simple + Papas", d:"2 hamburguesas + 1 porción de papas.", img:"", v:[["Combo",23000]]},
     {n:"Cheese doble + Monulibra simple + Papas", d:"2 hamburguesas + 1 porción de papas.", img:"", v:[["Combo",23000]]},
-    {n:"Nuggets + Papas Fritas", d:"Combo para compartir.", img:"img/nuggetspapas.png", stock:false, v:[["Combo",0]]},
+    {n:"Nuggets + Papas Fritas", d:"Combo para compartir.", img:"img/nuggetspapas.jpg", stock:false, v:[["Combo",0]]},
   ]},
   { cat:"Burger del Repar", note:"No incluyen papas", items:[
     {n:"KECO", d:"Una carne smasheada, cheddar, cebolla crispy y alioli.", img:"img/keco.jpg", v:[["Unidad",9500]]},
@@ -514,13 +515,13 @@ const MENU = [
     {n:"Santi", d:"Un medallón de carne, cheddar, cebolla crispy, lechuga y alioli.", img:"img/santi.jpg", v:[["Unidad",9500]]},
   ]},
   { cat:"Para picar", items:[
-    {n:"Nuggets", d:"10 unidades. Incluye 2 dips (salsa monu y barbacoa).", img:"img/nuggets.png", v:[["Unidad",11000]]},
-    {n:"Papas Fritas", d:"Porción.", img:"img/papas.png", stock:false, v:[["Unidad",0]]},
+    {n:"Nuggets", d:"10 unidades. Incluye 2 dips (salsa monu y barbacoa).", img:"img/nuggets.jpg", v:[["Unidad",11000]]},
+    {n:"Papas Fritas", d:"Porción.", img:"img/papas.jpg", stock:false, v:[["Unidad",0]]},
   ]},
   { cat:"Bebidas", items:[
-    {n:"Coca Cola 500ml", d:"Botella 500ml.", img:"img/coca.png", v:[["Unidad",2200]]},
-    {n:"Sprite 500ml", d:"Botella 500ml.", img:"img/sprite.png", v:[["Unidad",2200]]},
-    {n:"Fanta 500ml", d:"Botella 500ml.", img:"img/fanta.png", v:[["Unidad",2200]]},
+    {n:"Coca Cola 500ml", d:"Botella 500ml.", img:"img/coca.jpg", v:[["Unidad",2200]]},
+    {n:"Sprite 500ml", d:"Botella 500ml.", img:"img/sprite.jpg", v:[["Unidad",2200]]},
+    {n:"Fanta 500ml", d:"Botella 500ml.", img:"img/fanta.jpg", v:[["Unidad",2200]]},
   ]},
   { cat:"Postres", items:[
     {n:"Cheesecake", d:"Porción individual.", img:"img/cheesecake.jpg", v:[["Unidad",5300]]},
@@ -529,11 +530,11 @@ const MENU = [
   ]},
   { cat:"Salsas", items:[
     {n:"Monu", d:"Nuestra salsa de la casa.", img:"", v:[["Unidad",1000]]},
-    {n:"Alioli", d:"", img:"img/alioli.png", v:[["Unidad",1000]]},
-    {n:"Barbacoa", d:"", img:"img/barbacoa.png", v:[["Unidad",1000]]},
-    {n:"Mayonesa", d:"", img:"img/mayonesa.png", v:[["Unidad",1000]]},
-    {n:"Ketchup", d:"", img:"img/ketchup.png", v:[["Unidad",1000]]},
-    {n:"Mostaza", d:"", img:"img/mostaza.png", v:[["Unidad",1000]]},
+    {n:"Alioli", d:"", img:"img/alioli.jpg", v:[["Unidad",1000]]},
+    {n:"Barbacoa", d:"", img:"img/barbacoa.jpg", v:[["Unidad",1000]]},
+    {n:"Mayonesa", d:"", img:"img/mayonesa.jpg", v:[["Unidad",1000]]},
+    {n:"Ketchup", d:"", img:"img/ketchup.jpg", v:[["Unidad",1000]]},
+    {n:"Mostaza", d:"", img:"img/mostaza.jpg", v:[["Unidad",1000]]},
   ]},
 ];
 

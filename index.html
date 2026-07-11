@@ -259,6 +259,9 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
 .hours{font-size:.95rem;color:#cbb79c;line-height:1.7}
 .hours strong{color:var(--crema)}
 .hours .clock{font-size:2.3rem;color:var(--mostaza-2);font-weight:700;display:block;margin-top:4px}
+.hours .zones{margin-top:14px;padding-top:12px;border-top:1px dashed rgba(246,239,226,.18);
+  display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.hours .zones b{color:var(--celeste);font-weight:700}
 
 label{display:block;font-size:.9rem;margin:15px 0 7px;color:var(--kraft);font-weight:500}
 input,select,textarea{width:100%;padding:13px 15px;border-radius:12px;border:1px solid rgba(246,239,226,.2);
@@ -405,7 +408,12 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
       <div>
         <div class="panel" style="margin-bottom:22px">
           <div class="status" id="statusBox"><span class="pulse"></span><span id="statusTxt">Verificando horario…</span></div>
-          <div class="hours"><strong>Horario de atención</strong><span class="clock">19:30 – 00:00</span>Todos los días · Salón &amp; Delivery 🛵</div>
+          <div class="hours"><strong>Horario de atención</strong><span class="clock">19:30 – 00:00</span>Todos los días · Salón &amp; Delivery 🛵
+            <div class="zones">
+              <div>🛵 <span>Envíos a <b>Punta Lara</b>:</span> desde las 20:30 hs</div>
+              <div>🛵 <span>Envíos a <b>El Dique</b>:</span> de 21:30 a 22:30 hs</div>
+            </div>
+          </div>
         </div>
         <div class="panel">
           <h3 style="font-size:1.3rem;margin-bottom:8px;color:var(--crema)">Tu pedido</h3>
@@ -551,9 +559,9 @@ const REELS = [
   {video:"reels/1.mp4", poster:"img/njersey.jpg",   cap:"Burger Nueva Jersey 🇦🇷", url:"https://www.instagram.com/_monuburger/reel/DZalaiXsOeT/"},
   {video:"reels/2.mp4", poster:"img/kansas.jpg",     cap:"Burger Kansas ⭐",         url:"https://www.instagram.com/_monuburger/p/DZamGa1lQai/"},
   {video:"reels/3.mp4", poster:"img/witcher.jpg",    cap:"Witcher a full 🔥",        url:"https://www.instagram.com/_monuburger/p/DZalH7tFUzA/"},
-  {video:"reels/4.mp4", poster:"img/monuburger.jpg", cap:"La Monuburger 🍳",         url:"https://www.instagram.com/_monuburger/"},
-  {video:"reels/5.mp4", poster:"img/bacon.jpg",      cap:"Bacon burger 🥓",          url:"https://www.instagram.com/_monuburger/reels/"},
-  {video:"reels/6.mp4", poster:"img/crispy.jpg",     cap:"Crispy crocante 🧅",       url:"https://www.instagram.com/_monuburger/reels/"},
+  {video:"reels/4.mp4", poster:"img/monuburger.jpg", cap:"La Monuburger 🍳",         url:"https://www.instagram.com/_monuburger/reel/DaoFgEQPA8P/"},
+  {video:"reels/5.mp4", poster:"img/bacon.jpg",      cap:"Bacon burger 🥓",          url:"https://www.instagram.com/_monuburger/p/DKS-NePN8vI/"},
+  {video:"reels/6.mp4", poster:"img/crispy.jpg",     cap:"Crispy crocante 🧅",       url:"https://www.instagram.com/_monuburger/p/DKS9v02N_qJ/"},
 ];
 
 /* =====================================================================

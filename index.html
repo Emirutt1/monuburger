@@ -90,7 +90,8 @@ nav.solid{background:rgba(27,18,11,.97);box-shadow:0 6px 22px rgba(0,0,0,.45)}
   box-shadow:inset 0 -22px 44px rgba(20,12,6,.28),inset 0 8px 22px rgba(255,220,160,.18)}
 .hero-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:24px}
 .hero-tags a{background:var(--mostaza);color:var(--espresso);font-weight:600;padding:13px 26px;border-radius:999px;
-  transition:transform .15s,filter .2s;font-size:1.02rem}
+  transition:transform .15s,filter .2s;font-size:1.02rem;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.wa-ico{width:19px;height:19px;fill:#25d366;flex:none}
 .hero-tags a.ghost{background:transparent;color:var(--crema);border:1px solid rgba(246,239,226,.4)}
 .hero-tags a:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
@@ -353,7 +354,7 @@ footer{background:var(--bg);padding:54px 0 40px;text-align:center;border-top:1px
 
     <div class="hero-tags">
       <a href="#menu">Ver el menú 🍔</a>
-      <a href="#pedido" class="ghost">Pedir por WhatsApp</a>
+      <a href="#pedido" class="ghost"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.907z"/></svg>Pedir por WhatsApp</a>
     </div>
   </div>
 </header>
